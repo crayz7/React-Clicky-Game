@@ -15,87 +15,44 @@ class App extends Component {
     
   };
 
-  componentDidMount() {
-  }
-
-  //randomize =
-
   clickScore = id => {
-    const clicked = friends.filter(clicked => clicked.id === id);
-    console.log(clicked);
-    if (this.state.currentScore < 6) {
-      // Set its value to true
-      clicked[0].clicked = true;
+    const clickedFriend = this.state.friends.filter (friend => friend.id === id)
+    console.log(clickedFriend[0].clicked);
+    if (clickedFriend[0].clicked === undefined) {
+      console.log("matched")
+      const friends = this.state.friends.map(
+      friend => {
+        return id === friend.id 
+          ? { 'id': friend.id, 'name': friend.name, 'image' : friend.image, 'clicked' : true} 
+          : {'id' : friend.id, 'name' : friend.name, 'image' : friend.image, 'clicked' : friend.clicked}
+        }
+      );
 
-      // Randomize cards
-      friends.sort(function (a, b) { return 0.5 - Math.random() });
+    const newScore = this.state.currentScore + 1;
 
-      if (this.state.currentScore > this.state.topScore) {
-        this.setState({ topScore: this.state.currentScore });
+    this.setState({
+      friends: friends,
+      message: "You guessed correctly",
+      currentScore: newScore
+    });
+    
+    
+    if (newScore > this.state.topScore) {
+        this.setState({ topScore: newScore });
       }
 
-      this.setState({
-        friends: friends,
-        message: "You guessed correctly",
-        currentScore: this.state.currentScore + 1
-       // topScore: 
-      });
+    // Randomize cards
+    friends.sort(function (a, b) { return 0.5 + Math.random() });
+
     } else {
-        // Set its value to true
-        clicked[0].clicked = true;
-
-        this.setState({
-          topScore: 0,
-          currentScore: 0, 
-          message: "Good job, you won!"
-        })
-
-        for (let i = 0; i < clicked.length; i++) {
-          clicked[i].clicked = false;
-        }
-
-        // Shuffle the array to be rendered in a random order
-        clicked.sort(function (a, b) { return 0.5 - Math.random() });
-
-        // Set this.state.matches equal to the new matches array
-      this.setState({
+      console.log("else match");
+      this.setState ({
         friends: friends,
-        message: "Click an image begin",
-        currentScore: 0,
-        topScore: 0,
-      });
+        message: "You guessed incorrectly",
+        currentScore: 0
+      })
     }
-  }
-
-  //   if (clicked === undefined) {
-  //   const friends = this.state.friends.map(
-  //     friend => {
-
-  //       return id === friend.id 
-  //         ? { 'id': friend.id, 'name': friend.name, 'image' : friend.image, 'clicked' : true} 
-  //         : {'id' : friend.id, 'name' : friend.name, 'image' : friend.image, 'clicked' : friend.clicked}
-  //       }
-  //     );
-
-  //   this.setState({
-  //     friends: friends,
-  //     message: "You guessed correctly",
-  //     currentScore: this.state.currentScore + 1,
-  //     topScore: 0,
-      
-  //   });
-  
-  //   // Set this.state.friends equal to the new friends array
-  //   for (let i = this.state.friends.length - 1; i > 0; i--) {
-  //     let j = Math.floor(Math.random() * (i + 1));
-  //     [this.state.friends[i], this.state.friends[j]] = [this.state.friends[j], this.state.friends[i]];
-      
-  //   }
-  //   console.log(this.state.friends);
-  //  } else if (this.state.friends.clicked === true) {
-  //   console.log("reset game");
-  //  }
-  //};
+};
 
   // Map over this.state.friends and render a FriendCard component for each friend object
   render() {
