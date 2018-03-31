@@ -1,1 +1,1 @@
-# React-Clicky-Game
+Please cd into react-clicky-gamev2
