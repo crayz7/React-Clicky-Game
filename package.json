@@ -12,5 +12,18 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "description": "Please cd into react-clicky-game-v2 and npm start",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crayz7/React-Clicky-Game.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/crayz7/React-Clicky-Game/issues"
+  },
+  "homepage": "https://github.com/crayz7/React-Clicky-Game#readme"
 }
